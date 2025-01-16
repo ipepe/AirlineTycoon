@@ -35,6 +35,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencie
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jansson", "libs\jansson\jansson.vcxproj", "{001DB139-21CE-3DF6-AC7F-012126DBE563}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CE8F01C5-56C2-4CFB-86A9-F0D7676BEBFD}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		BUILDING.md = BUILDING.md
+		README.md = README.md
+		BuildTargets.targets = BuildTargets.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

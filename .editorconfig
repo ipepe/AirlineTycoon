@@ -1,0 +1,57 @@
+root = true
+
+# All files
+[*]
+indent_style = space
+
+# Xml files
+[*.xml]
+indent_size = 2
+
+# Applies to C++ files
+[*.{cpp,h,hpp,cxx,hxx}]
+indent_style = space
+indent_size = 4
+tab_width = 8
+max_line_length = 160
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Formatting specifics
+csharp_space_before_open_square_brackets = false
+dotnet_sort_system_directives_first = true
+
+# Alignments
+align_after_open_bracket = align
+align_trailing_comments = true
+allow_short_blocks_on_a_single_line = false
+allow_short_if_statements_on_a_single_line = false
+allow_short_functions_on_a_single_line = true
+
+# Line breaks and indentation
+always_break_after_return_type = false
+always_break_before_multiline_strings = false
+brace_style = attach
+break_before_ternary_operators = true
+constructor_initializer_indent_width = 4
+continuation_indent_width = 4
+namespace_indentation = none
+
+# Include statements
+sort_includes = false
+include_blocks = preserve
+
+# Spaces and alignment
+space_before_assignment_operators = true
+space_before_square_brackets = false
+spaces_in_parentheses = false
+spaces_in_square_brackets = false
+spaces_in_angles = false
+space_before_range_based_for_loop_colon = true
+
+# Pointer and reference alignment
+pointer_alignment = right
+
+# Other
+use_tab = false

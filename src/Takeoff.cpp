@@ -96,10 +96,12 @@ char *UCharToReadableAnsi(const unsigned char *pData, unsigned uLen);
 unsigned char *ReadableAnsiToUChar(const char *pData, unsigned uLen);
 
 #ifdef __cplusplus
-extern "C"
+#define EXTERN extern "C"
+#else
+#define EXTERN
 #endif
 
-int main(int argc, char *argv[]) {
+EXTERN int main(int argc, char *argv[]) {
 #ifdef TEST
     if (!run_regression()) {
         hprintf("Regression test failed!");
@@ -312,7 +314,6 @@ void CTakeOffApp::ReadOptions(int argc, char *argv[]) {
     //#define LANGUAGE_9      18             //U-noch frei
     //#define LANGUAGE_10     19             //V-noch frei
 
-    
     // gUpdatingPools = TRUE; //Zum testen; für Release auskommentieren
     CRegistryAccess reg(chRegKey);
 
