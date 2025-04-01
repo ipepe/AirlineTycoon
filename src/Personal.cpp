@@ -331,9 +331,9 @@ void CWorkers::ReInit(const CString &TabFilename, const CString &TabFilename2) {
     line++;
 
     Workers.ReSize(0);
-    Workers.ReSize(MAX_WORKERS);
+    Workers.ReSize(FileData.AnzEntries());
     Num = 0;
-     
+
     while (true) {
         if (FileP >= FileData.AnzEntries()) {
             break;
@@ -378,9 +378,7 @@ void CWorkers::ReInit(const CString &TabFilename, const CString &TabFilename2) {
                 }
             }
         } catch (...) {
-            if (Num >= Workers.AnzEntries()) {
-                AT_Log("Loading", "Failed to load new worker in file \"%s\" at line: %d", FullFilename(TabFilename, ExcelPath).c_str(), Num + 1);
-            }
+            AT_Log("Loading", "Failed to load new worker in file \"%s\" at line: %d", FullFilename(TabFilename, ExcelPath).c_str(), Num + 1);
         }
         Num++;
     }

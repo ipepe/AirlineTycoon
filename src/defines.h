@@ -152,7 +152,6 @@ constexpr char VersionString[] = FILE_VERSION_STRING;
 #define MAX_ROUTES 1500  // Zahl der vordefinierten Flugrouten
 #define MAX_PNAMES1 200
 #define MAX_PNAMES2 100
-#define MAX_WORKERS 350 // Maximale Zahl der Angestellten
 
 // Sprache:
 #define LANGUAGE_D 0   // D-Deutsch
