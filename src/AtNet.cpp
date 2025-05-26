@@ -2002,6 +2002,8 @@ void NetGenericSync(SLONG SyncId) {
         return;
     }
 
+    AT_Log_I("AtNet", "NetGenericSync: SyncId %x for player %li\n", SyncId, Sim.localPlayer);
+
     SIM::SendSimpleMessage(ATNET_GENERICSYNC, 0, Sim.localPlayer, SyncId); // Requesting Sync
 
     GenericSyncIds[Sim.localPlayer] = SyncId;
