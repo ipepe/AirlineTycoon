@@ -25,11 +25,27 @@ resolve_rpath() {
     local file="$1"
     local ref="$2"
     local libname="${ref#@rpath/}"
+
+    # Try LC_RPATH resolution first
     for rpath in $(get_rpaths "$file"); do
-        # Resolve @loader_path within rpath entries
         local resolved="${rpath/@loader_path/$(dirname "$file")}"
         if [ -f "$resolved/$libname" ]; then
             echo "$resolved/$libname"
+            return
+        fi
+    done
+
+    # Fallback: search Homebrew directories (covers copied dylibs whose
+    # @loader_path no longer resolves to the original Homebrew location)
+    local brew_prefix
+    brew_prefix=$(brew --prefix 2>/dev/null || echo "/opt/homebrew")
+    if [ -f "$brew_prefix/lib/$libname" ]; then
+        echo "$brew_prefix/lib/$libname"
+        return
+    fi
+    for dir in "$brew_prefix"/opt/*/lib; do
+        if [ -f "$dir/$libname" ]; then
+            echo "$dir/$libname"
             return
         fi
     done
