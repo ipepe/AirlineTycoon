@@ -66,7 +66,7 @@ jobs:
       # 1. <Windows, Release or Debug, latest MSVC compiler toolchain on the default runner image, default generator>
       # 2. <Linux, Release or Debug, latest GCC compiler toolchain on the default runner image, default generator>
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-13]
+        os: [ubuntu-latest, windows-latest, macos-13, macos-latest]
         name: ['linux', 'windows', 'macos']
         build_type:
           - ${{ needs.env.outputs.build-type }}
@@ -75,6 +75,7 @@ jobs:
           - os: windows-latest
           - os: ubuntu-latest
           - os: macos-13
+          - os: macos-latest
         include: # only include the configurations we want
           - os: windows-latest
             c_compiler: cl
@@ -90,6 +91,11 @@ jobs:
             c_compiler: gcc
             cpp_compiler: g++
             name: 'macos'
+            build_type: ${{ needs.env.outputs.build-type }}
+          - os: macos-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+            name: 'macos-arm64'
             build_type: ${{ needs.env.outputs.build-type }}
 
     # Execute this for each matrix
@@ -107,12 +113,12 @@ jobs:
         sudo apt-get install libjansson-dev libsdl2-dev libsdl2-gfx-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-net-dev libsdl2-ttf-dev
 
     - name: Setup homebrew (macOS)
-      if: matrix.name == 'macos'
+      if: startsWith(matrix.name, 'macos')
       id: set-up-homebrew
       uses: Homebrew/actions/setup-homebrew@master
 
-    - name: Install macOS dependencies
-      if: matrix.name == 'macos'
+    - name: Fix Python symlinks (macOS Intel)
+      if: matrix.os == 'macos-13'
       run: |
          # Temporary fix, see https://github.com/actions/setup-python/issues/577
          rm /usr/local/bin/2to3-3.12 || true
@@ -125,6 +131,10 @@ jobs:
          rm /usr/local/bin/pydoc3 || true
          rm /usr/local/bin/python3 || true
          rm /usr/local/bin/python3-config || true
+
+    - name: Install macOS dependencies
+      if: startsWith(matrix.name, 'macos')
+      run: |
          brew install cmake sdl2 sdl2_mixer sdl2_image sdl2_ttf jansson
 
     - name: Configure CMake
@@ -169,7 +179,7 @@ jobs:
     # Package the build results (linux)
     - name: Package artifact
       id: artifact-linux
-      if: matrix.name == 'linux' || matrix.name == 'macos'
+      if: matrix.name == 'linux' || startsWith(matrix.name, 'macos')
       run: |
         echo "Building linux ${{ needs.env.outputs.artifact-name }}-${{ matrix.name }}.tar"
         ARTIFACT_NAME=${{ needs.env.outputs.artifact-name }}-${{ matrix.name }}.tar
