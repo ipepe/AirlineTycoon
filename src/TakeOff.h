@@ -19,6 +19,7 @@ class CTakeOffApp {
     ~CTakeOffApp();
 
     static void GameLoop(void *);
+    static void DoOneFrame();
 #ifdef DEBUG
     void CheckSystem(void);
 #endif
