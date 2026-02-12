@@ -961,21 +961,18 @@ void CTakeOffApp::InitInstance(int argc, char *argv[]) {
 //--------------------------------------------------------------------------------------------
 // Sorgt für Screen Refresh und für Ablauf der Simulation:
 //--------------------------------------------------------------------------------------------
-void CTakeOffApp::GameLoop(void * /*unused*/) {
-    SLONG c = 0;
-    SLONG d = 0;
-    SLONG e = 0;
-    DWORD LastTime = 0xffffffff;
-    DWORD Time = 0;
-    DWORD NumSimSteps = 0;
-    SLONG Faktor = 1;
-    BOOL RefreshNeccessary = FALSE;
+void CTakeOffApp::DoOneFrame() {
+    static SLONG c = 0;
+    static SLONG d = 0;
+    static SLONG e = 0;
+    static DWORD LastTime = 0xffffffff;
+    static DWORD Time = 0;
+    static DWORD NumSimSteps = 0;
+    static SLONG Faktor = 1;
+    static BOOL RefreshNeccessary = FALSE;
+    static DWORD SimStepsCounter = 0; // Zählt wieviele SimSteps an einem Stück gemacht wurden um ab&zu einen ScreenRefresh zu erzwingen
 
-    DWORD SimStepsCounter = 0; // Zählt wieviele SimSteps an einem Stück gemacht wurden um ab&zu einen ScreenRefresh zu erzwingen
-
-    Sim.TimeSlice = 0;
-
-    while (bLeaveGameLoop == 0) {
+    {
         Time = SDL_GetTicks();
 
         if (LastTime == 0xffffffff || (bgJustDidLotsOfWork != 0) || bActive == FALSE) {
@@ -2241,6 +2238,24 @@ void CTakeOffApp::GameLoop(void * /*unused*/) {
         MessagePump();
     }
 
+    // Frame limiter: cap at ~60 FPS when VSync isn't throttling
+    static const DWORD TARGET_FRAME_MS = 16; // ~60 FPS
+    DWORD frameElapsed = SDL_GetTicks() - Time;
+    if (frameElapsed < TARGET_FRAME_MS) {
+        SDL_Delay(TARGET_FRAME_MS - frameElapsed);
+    }
+}
+
+//--------------------------------------------------------------------------------------------
+// Sorgt für Screen Refresh und für Ablauf der Simulation:
+//--------------------------------------------------------------------------------------------
+void CTakeOffApp::GameLoop(void * /*unused*/) {
+    Sim.TimeSlice = 0;
+
+    while (bLeaveGameLoop == 0) {
+        DoOneFrame();
+    }
+
     if (bFullscreen != 0) {
         // lpDD->RestoreDisplayMode ();
         // ClipCursor (NULL);
@@ -2254,7 +2269,7 @@ void CTakeOffApp::GameLoop(void * /*unused*/) {
     }
 
     if (Sim.Players.Players.AnzEntries() > 0) {
-        for (c = 0; c < Sim.Players.AnzPlayers; c++) {
+        for (SLONG c = 0; c < Sim.Players.AnzPlayers; c++) {
             if (Sim.Players.Players[c].LocationWin != nullptr) {
                 auto *TmpWin = Sim.Players.Players[c].LocationWin;
                 Sim.Players.Players[c].LocationWin = nullptr;
