@@ -360,13 +360,19 @@ void CTafelData::Randomize(SLONG Day) {
             maxCities = 4;
         }
 
-        SLONG numTries = min(Day, 10);
-        if (Sim.Difficulty == DIFF_NORMAL && numTries < 10) {
-            numTries = 10;
+        SLONG numTries = std::max(Day, 200); // or higher number like 30
+        if (Sim.Difficulty == DIFF_NORMAL && numTries < 200) {
+            numTries = 200;
         }
+
 
         std::vector<CTafelZettel> availableCities;
         GetAvailableCities(availableCities, citiesToExclude);
+
+        if (Sim.Options.OptionRentOfficeTriggerPercent <= 0 || Sim.Options.OptionRentOfficeTriggerPercent > 100) {
+            AT_Log("!!! Invalid OptionRentOfficeTriggerPercent: %d", Sim.Options.OptionRentOfficeTriggerPercent);
+            Sim.Options.OptionRentOfficeTriggerPercent = 36; // or some safe fallback
+        }
 
         ULONG citiesToPick = 0;
         for (c = 0; c < numTries; c++) {

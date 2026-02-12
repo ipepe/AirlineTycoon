@@ -95,7 +95,10 @@ void NewGamePopup::Konstruktor(BOOL /*bHandy*/, SLONG /*PlayerNum*/) {
 #endif
 
     if (Sim.Options.OptionAirport == -1) {
-        if (gLanguage == LANGUAGE_N) {
+        if (gLanguage == LANGUAGE_P) {
+            Sim.Options.OptionAirport = Cities.GetIdFromName("Warszawa");
+        }
+        else if (gLanguage == LANGUAGE_N) {
             Sim.Options.OptionAirport = Cities.GetIdFromName("Berlijn");
         } else if (gLanguage == LANGUAGE_F) {
             Sim.Options.OptionAirport = Cities.GetIdFromName("Paris");

@@ -1005,7 +1005,80 @@ void GameFrame::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) {
         }
     }
 
-    if (gLanguage == LANGUAGE_D || gLanguage == LANGUAGE_N) {
+    if (gLanguage == LANGUAGE_P) {
+        // POLSKI
+        switch (nChar) {
+        case 'J':
+            nTargetRoom = 'J';
+            break;
+        case 'T':
+            nTargetRoom = ROOM_REISEBUERO;
+            break;
+        case 'B':
+            nTargetRoom = ROOM_BURO_A;
+            break;
+        case 'C':
+            nTargetRoom = ROOM_RICKS;
+            break;
+        case 'D':
+            nTargetRoom = ROOM_SHOP1;
+            break;
+        case 'E':
+            nTargetRoom = ROOM_WERBUNG;
+            break;
+        case 'G':
+            nTargetRoom = ROOM_GLOBE;
+            break;
+        case 'U':
+            nTargetRoom = ROOM_AUFSICHT;
+            break;
+        case 'S':
+            nTargetRoom = ROOM_RUSHMORE;
+            break;
+        case 'I':
+            nTargetRoom = ROOM_KIOSK;
+            break;
+        case 'L':
+            nTargetRoom = ROOM_LAST_MINUTE;
+            break;
+        case 'M':
+            nTargetRoom = ROOM_MUSEUM;
+            break;
+        case 'N':
+            nTargetRoom = ROOM_NASA;
+            break;
+        case 'P':
+            nTargetRoom = ROOM_PERSONAL_A;
+            break;
+        case 'R':
+            nTargetRoom = ROOM_ROUTEBOX;
+            break;
+        case 'F':
+            nTargetRoom = ROOM_MAKLER;
+            break;
+        case 'K':
+            nTargetRoom = ROOM_BANK;
+            break;
+        case 'W':
+            nTargetRoom = ROOM_WERKSTATT;
+            break;
+        case 'A':
+            nTargetRoom = ROOM_ARAB_AIR;
+            break;
+        case 'H':
+            nTargetRoom = ROOM_FRACHT;
+            break;
+        case 'X':
+            nTargetRoom = ROOM_DESIGNER;
+            break;
+        case 'Y':
+            nTargetRoom = ROOM_SECURITY;
+            break;
+        default:
+            break;
+        }
+    }
+    else if (gLanguage == LANGUAGE_D || gLanguage == LANGUAGE_N) {
         // Deutsch, Niederländisch
         switch (nChar) {
         case 'J':
