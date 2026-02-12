@@ -218,7 +218,7 @@ void KLACKER::PrintAt(SLONG x, SLONG y, const char *Text) {
                 ch = static_cast<char>(142);
             }
         }
-        if (gLanguage == LANGUAGE_E) // E=Polnisch! Krank!
+        if (gLanguage == LANGUAGE_E || gLanguage == LANGUAGE_P) // 2.0
         {
             if (ch == static_cast<char>(185)) {
                 ch = static_cast<char>(165);
@@ -247,6 +247,34 @@ void KLACKER::PrintAt(SLONG x, SLONG y, const char *Text) {
             if (ch == static_cast<char>(191)) {
                 ch = static_cast<char>(175);
             }
+
+            //if (ch == static_cast<char>(185)) {
+            //    ch = static_cast<char>(165);
+            //}
+            //if (ch == static_cast<char>(230)) {
+            //    ch = static_cast<char>(198);
+            //}
+            //if (ch == static_cast<char>(234)) {
+            //    ch = static_cast<char>(202);
+            //}
+            //if (ch == static_cast<char>(179)) {
+            //    ch = static_cast<char>(163);
+            //}
+            //if (ch == static_cast<char>(241)) {
+            //    ch = static_cast<char>(209);
+            //}
+            //if (ch == static_cast<char>(243)) {
+            //    ch = static_cast<char>(211);
+            //}
+            //if (ch == static_cast<char>(156)) {
+            //    ch = static_cast<char>(140);
+            //}
+            //if (ch == static_cast<char>(159)) {
+            //    ch = static_cast<char>(143);
+            //}
+            //if (ch == static_cast<char>(191)) {
+            //    ch = static_cast<char>(175);
+            //}
         }
         if (gLanguage == LANGUAGE_S || gLanguage == LANGUAGE_O) {
             if (ch == static_cast<char>(164)) {

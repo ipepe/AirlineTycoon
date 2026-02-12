@@ -33,7 +33,10 @@ void InitPathVars() {
     gSpawnOnly = FALSE;
 
     CString prefix = "";
-    if (gLanguage == LANGUAGE_D) {
+    if (gLanguage == LANGUAGE_P) {
+        prefix = "pl";
+    }
+    else if (gLanguage == LANGUAGE_D) {
         prefix = "de";
     } else if (gLanguage == LANGUAGE_E) {
         prefix = "en";
@@ -46,6 +49,7 @@ void InitPathVars() {
     if (!DoesFileExist(FullFilename("voice/aa/100.ogg", prefix))) {
         prefix.clear();
 
+
         if (DoesFileExist(FullFilename("voice/aa/100.ogg", "de"))) {
             gLanguage = LANGUAGE_D;
             prefix = "de";
@@ -55,6 +59,9 @@ void InitPathVars() {
         } else if (DoesFileExist(FullFilename("voice/aa/100.ogg", "fr"))) {
             gLanguage = LANGUAGE_F;
             prefix = "fr";
+        } else {
+            gLanguage = LANGUAGE_P;
+            prefix = "pl";
         }
 
         if (prefix.empty()) {
