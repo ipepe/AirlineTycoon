@@ -347,7 +347,7 @@ void Options::OnPaint() {
                 DurchsagenFX.Play();
             }
 
-#if !defined(NO_D_VOICES) || !defined(NO_E_VOICES) || !defined(NO_N_VOICES)
+#if !defined(NO_D_VOICES) || !defined(NO_E_VOICES) || !defined(NO_P_VOICES) || !defined(NO_N_VOICES)
             if (!bVoicesNotFound) {
                 if (Line == 11 && Sim.Options.OptionTalking != Column - 15) {
                     Sim.Options.OptionTalking = Column - 15;
@@ -701,7 +701,7 @@ void Options::OnLButtonDown(UINT /*nFlags*/, CPoint point) {
                     DurchsagenFX.Play();
                 }
 
-#if !defined(NO_D_VOICES) || !defined(NO_E_VOICES) || !defined(NO_N_VOICES)
+#if !defined(NO_D_VOICES) || !defined(NO_E_VOICES) || !defined(NO_P_VOICES) || !defined(NO_N_VOICES)
                 if (!bVoicesNotFound) {
                     if (Line == 11) {
                         Sim.Options.OptionTalking = Column - 15;

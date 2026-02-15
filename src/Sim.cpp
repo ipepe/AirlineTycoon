@@ -606,12 +606,28 @@ void SIM::ChooseStartup() {
     Workers.EnsureBerater(BERATERTYP_FLUGZEUG);
 
     if (Options.OptionAirport == -1) {
-        Options.OptionAirport = Cities.GetIdFromName("Berlin");
-        if (gLanguage == LANGUAGE_E) {
-            Options.OptionAirport = Cities.GetIdFromName("London");
-        }
-        if (gLanguage == LANGUAGE_F) {
-            Options.OptionAirport = Cities.GetIdFromName("Paris");
+        switch (gLanguage) {
+            case LANGUAGE_E:
+                Options.OptionAirport = Cities.GetIdFromName("London");
+                break;
+            case LANGUAGE_F:
+                Options.OptionAirport = Cities.GetIdFromName("Paris");
+                break;
+            case LANGUAGE_P:
+                Options.OptionAirport = Cities.GetIdFromName("Warszawa");
+                break;
+            case LANGUAGE_N:
+                Options.OptionAirport = Cities.GetIdFromName("Amsterdam");
+                break;
+            case LANGUAGE_I:
+                Options.OptionAirport = Cities.GetIdFromName("Roma");
+                break;
+            case LANGUAGE_S:
+            case LANGUAGE_O:
+                Options.OptionAirport = Cities.GetIdFromName("Madrid");
+                break;
+            default:
+                Options.OptionAirport = Cities.GetIdFromName("Berlin");
         }
     }
     HomeAirportId = Options.OptionAirport;
@@ -1191,11 +1207,11 @@ void SIM::CreateMissionCities() {
 
     // Default-Städte:
     MissionCities[0] = Cities.GetIdFromNames("R\xEDo de Janeiro", "Rio de Janeiro", NULL);
-    MissionCities[1] = Cities.GetIdFromNames("Nova Iorque", "Nueva York", "New York", NULL);
+    MissionCities[1] = Cities.GetIdFromNames("Nova Iorque", "Nueva York", "New York", "Nowy Jork", NULL);
     MissionCities[2] = Cities.GetIdFromNames("T\xF3quio", "Tokio", "Tokyo", NULL);
     MissionCities[3] = Cities.GetIdFromNames("Deli", "Delhi", "Dill\xED", NULL);
     MissionCities[4] = Cities.GetIdFromNames("Joanesburgo", "Johanesburgo", "Johannesburg", NULL);
-    MissionCities[5] = Cities.GetIdFromNames("Moskau", "Moskou", "Moscovo", "Moscou", "Mosca", "Mosc\xFA", "Moscow", "Moskva", NULL);
+    MissionCities[5] = Cities.GetIdFromNames("Moskau", "Moskou", "Moscovo", "Moscou", "Mosca", "Mosc\xFA", "Moscow", "Moskva", "Moskwa", NULL);
 
     /*if (gLanguage==LANGUAGE_S) MissionCities[0]=Cities.GetIdFromName ("Río de Janeiro");
       else                       MissionCities[0]=Cities.GetIdFromName ("Rio de Janeiro");
@@ -3987,7 +4003,13 @@ void COptions::ReadOptions() {
         }
 #endif
 #ifdef NO_E_VOICES
-        if (gLanguage == LANGUAGE_E &&) {
+        if (gLanguage == LANGUAGE_E) {
+            OptionSpeechBubble = TRUE;
+            OptionTalking = FALSE;
+        }
+#endif
+#ifdef NO_P_VOICES
+        if (gLanguage == LANGUAGE_P) {
             OptionSpeechBubble = TRUE;
             OptionTalking = FALSE;
         }
@@ -4177,6 +4199,10 @@ void COptions::WriteOptions() {
     if (gLanguage == LANGUAGE_E)
         goto dont_save_talking;
 #endif
+#ifdef NO_P_VOICES
+    if (gLanguage == LANGUAGE_P)
+        goto dont_save_talking;
+#endif
 #ifdef NO_N_VOICES
     if (gLanguage == LANGUAGE_N)
         goto dont_save_talking;
@@ -4189,6 +4215,9 @@ void COptions::WriteOptions() {
 dont_save_talking:
 #endif
 #ifdef NO_E_VOICES
+dont_save_talking:
+#endif
+#ifdef NO_P_VOICES
 dont_save_talking:
 #endif
 #ifdef NO_N_VOICES
