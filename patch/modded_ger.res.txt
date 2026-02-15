@@ -3,6 +3,7 @@
 //==============================================================================
 >Misc
 >>0000001
+  P::# Ekran: Pełny ekran
   B::# Display: Fullscreen
   E::# Display: Fullscreen
   F::# Affichage: Grand
@@ -12,6 +13,7 @@
   S::# Display: Fullscreen
   D::# Display: Vollbild
 >>0000002
+  P::# Ekran: Okno
   B::# Display: Windowed
   E::# Display: Windowed
   F::# Affichage: Flottant
@@ -21,6 +23,7 @@
   S::# Display: Windowed
   D::# Display: Fenster
 >>0000003
+  P::# Ekran: Bez ramki
   B::# Display: Borderless
   E::# Display: Borderless
   F::# Affichage: Borderless
@@ -30,15 +33,17 @@
   S::# Display: Borderless
   D::# Display: Rahmenlos
 >>0000010
+  P::# Proporcje: Rozciągnij
   B::# Aspect Ratio: Stretch
   E::# Aspect Ratio: Stretch
-  F::# Aspect Ratio: Etir�
+  F::# Aspect Ratio: Etiré
   I::# Aspect Ratio: Stretch
   N::# Aspect Ratio: Stretch
   O::# Aspect Ratio: Stretch
   S::# Aspect Ratio: Stretch
-  D::# Verh�ltnis: Ausdehnen
+  D::# Verhältnis: Ausdehnen
 >>0000011
+  P::# Proporcje: Zachowaj
   B::# Aspect Ratio: Keep
   E::# Aspect Ratio: Keep
   F::# Aspect Ratio: Original
@@ -46,8 +51,9 @@
   N::# Aspect Ratio: Keep
   O::# Aspect Ratio: Keep
   S::# Aspect Ratio: Keep
-  D::# Verh�ltnis: Beibehalten
+  D::# Verhältnis: Beibehalten
 >>0000020
+  P::# Muzyka: Off
   B::# Music: Off
   E::# Music: Off
   F::# Musique: Off
@@ -57,6 +63,7 @@
   S::# Music: Off
   D::# Musik: Off
 >>0000021
+  P::# Muzyka: MIDI
   B::# Music: MIDI
   E::# Music: MIDI
   F::# Musique: MIDI
@@ -66,6 +73,7 @@
   S::# Music: MIDI
   D::# Musik: MIDI
 >>0000022
+  P::# Muzyka: Ogg
   B::# Music: Ogg
   E::# Music: Ogg
   F::# Musique: Ogg
@@ -75,6 +83,7 @@
   S::# Music: Ogg
   D::# Musik: Ogg
 >>0000030
+  P::# Dźwięk:
   B::# Sound:
   E::# Sound:
   F::# Son:

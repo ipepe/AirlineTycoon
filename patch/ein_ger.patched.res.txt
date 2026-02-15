@@ -1,8 +1,9 @@
 //==============================================================================
-//Modded "ein_ger" resources
+//Modded "ein_ger" resources 2.0
 //==============================================================================
 >00001000
 >>00003000
+  P::%s beczka
   B::%s barril
   E::%s barrel
   F::%s tonneau
@@ -12,6 +13,7 @@
   S::%s barril
   D::%s fass
 >>00003001
+  P::%s beczek
   B::%s barris
   E::%s barrels
   F::%s tonneaux

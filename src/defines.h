@@ -13,6 +13,7 @@
 // #define DEMO            //Beschränkung der Missionen und einiges mehr
 // #define NO_D_VOICES     //Keine deutschen Voices, Sprechblasen werden eingeschaltet
 // #define NO_E_VOICES     //Keine englischen Voices, Sprechblasen werden eingeschaltet
+// #define NO_P_VOICES     //Keine polnischen Voices, Sprechblasen werden eingeschaltet
 // #define NO_N_VOICES     //Keine niernerländischen Voices, Sprechblasen werden eingeschaltet
 // #define NO_INTRO        //Kein Intro, d.h. er wird übersprungen
 
