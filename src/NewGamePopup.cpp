@@ -95,20 +95,28 @@ void NewGamePopup::Konstruktor(BOOL /*bHandy*/, SLONG /*PlayerNum*/) {
 #endif
 
     if (Sim.Options.OptionAirport == -1) {
-        if (gLanguage == LANGUAGE_N) {
-            Sim.Options.OptionAirport = Cities.GetIdFromName("Berlijn");
-        } else if (gLanguage == LANGUAGE_F) {
-            Sim.Options.OptionAirport = Cities.GetIdFromName("Paris");
-        } else if (gLanguage == LANGUAGE_I) {
-            Sim.Options.OptionAirport = Cities.GetIdFromName("Roma");
-        } else if (gLanguage == LANGUAGE_O) {
-            Sim.Options.OptionAirport = Cities.GetIdFromName("Madrid");
-        } else if (gLanguage == LANGUAGE_S) {
-            Sim.Options.OptionAirport = Cities.GetIdFromName("Madrid");
-        } else if (gLanguage == LANGUAGE_E) {
-            Sim.Options.OptionAirport = Cities.GetIdFromName("London");
-        } else {
-            Sim.Options.OptionAirport = Cities.GetIdFromName("Berlin");
+        switch (gLanguage) {
+            case LANGUAGE_E:
+                Sim.Options.OptionAirport = Cities.GetIdFromName("London");
+                break;
+            case LANGUAGE_F:
+                Sim.Options.OptionAirport = Cities.GetIdFromName("Paris");
+                break;
+            case LANGUAGE_P:
+                Sim.Options.OptionAirport = Cities.GetIdFromName("Warszawa");
+                break;
+            case LANGUAGE_N:
+                Sim.Options.OptionAirport = Cities.GetIdFromName("Amsterdam");
+                break;
+            case LANGUAGE_I:
+                Sim.Options.OptionAirport = Cities.GetIdFromName("Roma");
+                break;
+            case LANGUAGE_S:
+            case LANGUAGE_O:
+                Sim.Options.OptionAirport = Cities.GetIdFromName("Madrid");
+                break;
+            default:
+                Sim.Options.OptionAirport = Cities.GetIdFromName("Berlin");
         }
     }
 
@@ -2561,8 +2569,23 @@ void NewGamePopup::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
 
     nChar = KeycodeToUpper(nChar);
 
+    // Define valid characters for input including Polish diacritics (CP1252 encoding)
+    const bool validCharacter = nChar == '-' || nChar == ' ' || (nChar >= 'A' && nChar <= 'Z') || nChar == '.' ||
+                                // German umlauts
+                                nChar == '\xC4' || nChar == '\xD6' || nChar == '\xDC' ||
+                                // Polish characters (CP1252 encoding)
+                                nChar == '\xA5' ||  // Ą
+                                nChar == '\x8C' ||  // Ś  
+                                nChar == '\xCA' ||  // Ę
+                                nChar == '\xA3' ||  // Ł
+                                nChar == '\xD1' ||  // Ń
+                                nChar == '\xD3' ||  // Ó
+                                nChar == '\x8F' ||  // Ź
+                                nChar == '\xAF' ||  // Ż
+                                nChar == '\x86';    // Ć
+
     if (CursorY != -1 && isPlayerSelect(PageNum)) {
-        if (nChar == '-' || nChar == ' ' || (nChar >= 'A' && nChar <= 'Z') || nChar == '\xC4' || nChar == '\xD6' || nChar == '\xDC' || nChar == '.') {
+        if (validCharacter) {
             if (CursorX < 0) {
                 if (nChar != ' ') {
                     Sim.Players.Players[SLONG(CursorY / 2)].Abk.SetAt(CursorX + 3, UBYTE(nChar));
@@ -2591,7 +2614,7 @@ void NewGamePopup::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
             }
         }
     } else if (PageNum == PAGE_TYPE::MULTIPLAYER_CREATE_SESSION) {
-        if (nChar == '-' || nChar == ' ' || (nChar >= 'A' && nChar <= 'Z') || nChar == '\xC4' || nChar == '\xD6' || nChar == '\xDC' || nChar == '.') {
+        if (validCharacter) {
             NetworkSession.SetAt(CursorX, UBYTE(nChar));
             RefreshKlackerField();
 
