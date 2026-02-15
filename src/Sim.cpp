@@ -608,7 +608,7 @@ void SIM::ChooseStartup() {
     if (Options.OptionAirport == -1) {
         switch (gLanguage) {
             case LANGUAGE_E:
-                Options.OptionAirport = Cities.GetIdFromName("Berlin"); // workaround for Polish until properly added
+                Options.OptionAirport = Cities.GetIdFromName("London");
                 break;
             case LANGUAGE_F:
                 Options.OptionAirport = Cities.GetIdFromName("Paris");

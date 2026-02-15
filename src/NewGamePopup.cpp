@@ -97,7 +97,7 @@ void NewGamePopup::Konstruktor(BOOL /*bHandy*/, SLONG /*PlayerNum*/) {
     if (Sim.Options.OptionAirport == -1) {
         switch (gLanguage) {
             case LANGUAGE_E:
-                Sim.Options.OptionAirport = Cities.GetIdFromName("Berlin"); // workaround for Polish until properly added
+                Sim.Options.OptionAirport = Cities.GetIdFromName("London");
                 break;
             case LANGUAGE_F:
                 Sim.Options.OptionAirport = Cities.GetIdFromName("Paris");
@@ -2569,7 +2569,20 @@ void NewGamePopup::OnChar(UINT nChar, UINT nRepCnt, UINT nFlags) {
 
     nChar = KeycodeToUpper(nChar);
 
-    const bool validCharacter = nChar == '-' || nChar == ' ' || (nChar >= 'A' && nChar <= 'Z') || nChar == '\xC4' || nChar == '\xD6' || nChar == '\xDC' || nChar == '.';
+    // Define valid characters for input including Polish diacritics (CP1252 encoding)
+    const bool validCharacter = nChar == '-' || nChar == ' ' || (nChar >= 'A' && nChar <= 'Z') || nChar == '.' ||
+                                // German umlauts
+                                nChar == '\xC4' || nChar == '\xD6' || nChar == '\xDC' ||
+                                // Polish characters (CP1252 encoding)
+                                nChar == '\xA5' ||  // Ą
+                                nChar == '\x8C' ||  // Ś  
+                                nChar == '\xCA' ||  // Ę
+                                nChar == '\xA3' ||  // Ł
+                                nChar == '\xD1' ||  // Ń
+                                nChar == '\xD3' ||  // Ó
+                                nChar == '\x8F' ||  // Ź
+                                nChar == '\xAF' ||  // Ż
+                                nChar == '\x86';    // Ć
 
     if (CursorY != -1 && isPlayerSelect(PageNum)) {
         if (validCharacter) {
