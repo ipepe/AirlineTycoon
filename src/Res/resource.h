@@ -6,11 +6,11 @@
 #define IDR_ATICON 999
 #define IDR_MAINFRAME1 1000
 
-#define FILE_VERSION 1, 9, 2
+#define FILE_VERSION 1, 9, 3
 #ifdef _DEBUG
-#define FILE_VERSION_STRING "VERSION 1.9.2 DEBUG"
+#define FILE_VERSION_STRING "VERSION 1.9.3 DEBUG"
 #else
-#define FILE_VERSION_STRING "VERSION 1.9.2 RELEASE"
+#define FILE_VERSION_STRING "VERSION 1.9.3 RELEASE"
 #endif
 
 // Next default values for new objects
