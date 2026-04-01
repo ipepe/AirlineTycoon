@@ -218,7 +218,7 @@ void KLACKER::PrintAt(SLONG x, SLONG y, const char *Text) {
                 ch = static_cast<char>(142);
             }
         }
-        if (gLanguage == LANGUAGE_E) // E=Polnisch! Krank!
+        if (gLanguage == LANGUAGE_E || gLanguage == LANGUAGE_P)
         {
             if (ch == static_cast<char>(185)) {
                 ch = static_cast<char>(165);
